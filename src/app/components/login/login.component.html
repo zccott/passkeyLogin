@@ -11,11 +11,12 @@
         <mat-error> At least 3 characters. </mat-error>
         }
       </mat-form-field>
-    <button class="login-btn" mat-fab extended (click)="onLogin()">
+    <button class="login-btn" mat-fab extended (click)="onSignUp()">
       <mat-icon>favorite</mat-icon>
       Login
     </button>
     <p>i have a account! <a (click)="onTabSwitch()">Sign In</a></p>
+    <p>{{isError}}</p>
   </div>
   } @else {
 
