@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+.container {
+  padding: 40px 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  height: 500px;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.innerContainer{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+
+.login-btn, mat-form-field{
+  width: 300px;
+}
+
+p {
+  font-size: 14px;
+  color: #6c757d; /* Subtle gray color for the text */
+  margin-top: 16px;
+  text-align: center; /* Center-align the text */
+}
+
+p a {
+  color: #007bff; /* Blue color for the link */
+  text-decoration: none; /* Remove underline */
+  font-weight: bold; /* Make the link bold */
+  transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+p a:hover {
+  color: #0056b3; /* Darker blue on hover */
+  text-decoration: underline; /* Add underline on hover */
+}
+

@@ -1,1 +1,40 @@
-<p>login works!</p>
+<div class="container">
+  @if(isSignUp){
+  <div class="innerContainer">
+    <h1>Sign Up</h1>
+      <mat-form-field appearance="outline" hideRequiredMarker>
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="zccott" [formControl]="username" />
+        @if(username.touched && username.touched){
+        <mat-error> Username is required. </mat-error>
+        } @else if (username.touched &&username.hasError('minlength')) {
+        <mat-error> At least 3 characters. </mat-error>
+        }
+      </mat-form-field>
+    <button class="login-btn" mat-fab extended (click)="onLogin()">
+      <mat-icon>favorite</mat-icon>
+      Login
+    </button>
+    <p>i have a account! <a (click)="onTabSwitch()">Sign In</a></p>
+  </div>
+  } @else {
+
+  <div class="innerContainer">
+    <h1>Login</h1>
+      <mat-form-field appearance="outline" hideRequiredMarker>
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="zccott" [formControl]="username" />
+        @if(username.touched && username.touched){
+        <mat-error> Username is required. </mat-error>
+        } @else if (username.touched &&username.hasError('minlength')) {
+        <mat-error> At least 3 characters. </mat-error>
+        }
+      </mat-form-field>
+    <button class="login-btn" mat-fab extended (click)="onLogin()">
+      <mat-icon>favorite</mat-icon>
+      Login
+    </button>
+    <p>don't have a account? <a (click)="onTabSwitch()">Register</a></p>
+  </div>
+  }
+</div>
