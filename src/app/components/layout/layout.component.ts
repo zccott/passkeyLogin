@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 import { MeterialModule } from '../../../Meterial.Module';
 
 @Component({
@@ -10,4 +10,10 @@ import { MeterialModule } from '../../../Meterial.Module';
 })
 export class LayoutComponent {
 
+  router = inject(Router)
+
+  onLogout() {
+    localStorage.removeItem('passKeyLogin');
+    this.router.navigate(['/login']);
+  }
 }

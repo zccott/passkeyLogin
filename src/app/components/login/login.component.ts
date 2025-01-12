@@ -4,6 +4,7 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { startAuthentication, startRegistration } from '@simplewebauthn/browser';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   imports: [MeterialModule, ReactiveFormsModule, CommonModule],
@@ -15,7 +16,8 @@ export class LoginComponent {
   isSignUp: boolean = true;
   isError: string = '';
 
-  authsrv = inject(AuthService)
+  authsrv = inject(AuthService);
+  router = inject(Router);
 
   readonly username = new FormControl('',{
     validators : [
@@ -106,6 +108,8 @@ export class LoginComponent {
       this.authsrv.verifyAuth(optionsJSON, attResp).subscribe((res: any )=> {
         if(res.verified == true){
           this.isError = 'login success';
+          localStorage.setItem('passKeyLogin', res.verified);
+          this.router.navigate(['/home']);
         }else{
           this.isError = 'Login Failure';
         }
