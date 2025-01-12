@@ -24,15 +24,6 @@ export class LoginComponent {
     ]
   });
 
-
-  onLogin(){
-    this.username.markAsTouched();
-
-    if (this.username.valid) {
-      console.log('No errors. Form is valid!');
-      // this.createUser(this.username.value);
-    }
-  }
   onSignUp(){
     this.username.markAsTouched();
 
@@ -42,12 +33,24 @@ export class LoginComponent {
     }
   }
 
-  createUser(user: any){
-    this.authsrv.initRegister(user).subscribe(res => {
-      const optionsJSON = res
-      this.handleWebAuthnRegistration(optionsJSON);
+  createUser(user: any) {
+    this.authsrv.initRegister(user).subscribe({
+      next: (res) => {
+        const optionsJSON = res;
+        console.log('Registration options received:', optionsJSON);
+        this.handleWebAuthnRegistration(optionsJSON);
+      },
+      error: (err) => {
+        console.error('Error during registration:', err);
+        if (err.error && err.error.message) {
+          this.isError = err.error.message;
+        } else {
+          this.isError = 'Username Already Exists';
+        }
+      },
     });
   }
+  
 
   async handleWebAuthnRegistration(optionsJSON: any): Promise<void>{
     try {
@@ -55,13 +58,62 @@ export class LoginComponent {
       const attResp = await startRegistration({ optionsJSON });
       console.log(attResp);
       this.isError = '';
-      this.authsrv.verifyRegister(optionsJSON, attResp).subscribe(res => {
+      this.authsrv.verifyRegister(optionsJSON, attResp).subscribe((res: any ) => {
         this.isError = 'registered success';
-        this.onTabSwitch();
+        setTimeout(() => {
+          this.onTabSwitch();
+        }, 5000);
       })
     } catch (err) {
-      console.error('Error during registration', err);
+      console.error('Error during registration');
       this.isError = 'An error occurred during registration';
+    }
+  }
+
+  onLogin(){
+    this.username.markAsTouched();
+
+    if (this.username.valid) {
+      console.log('No errors. Form is valid!');
+      this.validateUser(this.username.value);
+    }
+  }
+
+  validateUser(user: any) {
+    this.authsrv.initAuth(user).subscribe({
+      next: (res) => {
+
+        const optionsJSON = res;
+        console.log('going inside handleWebAuthnLogin')
+        this.handleWebAuthnLogin(optionsJSON);
+      },
+      error: (err) => {
+        console.error('Error from backend:', err);
+        if (err.error && err.error.message) {
+          this.isError = err.error.message;
+        } else {
+          this.isError = 'User Not Found! Please Register';
+        }
+      },
+    });
+  }
+
+  async handleWebAuthnLogin(optionsJSON: any): Promise<void>{
+    console.log('inside web authn login');
+    try {
+      const attResp = await startAuthentication({ optionsJSON });
+      this.isError = '';
+      this.authsrv.verifyAuth(optionsJSON, attResp).subscribe((res: any )=> {
+        if(res.verified == true){
+          this.isError = 'login success';
+        }else{
+          this.isError = 'Login Failure';
+        }
+        
+      })
+    } catch (err) {
+      console.error('Error during authentication');
+      this.isError = 'Login Failure';
     }
   }
 
@@ -70,4 +122,9 @@ export class LoginComponent {
     this.username.reset();
     this.isError = '';
   }
+}
+
+interface AuthResponse {
+  verified: boolean;
+  error?: string;  // Optionally, you might have an error field
 }

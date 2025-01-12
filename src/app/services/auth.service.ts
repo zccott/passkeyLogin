@@ -20,4 +20,13 @@ export class AuthService {
       const body = { optionsJSON, attResp };
       return this.http.post(this.apiUrl + '/verify-register', body);
     }
+
+    initAuth(username: any){
+      return this.http.post(this.apiUrl + '/init-auth', {username});
+      }
+
+      verifyAuth(optionsJSON: any, attResp: any) {
+        const body = { optionsJSON, attResp };
+        return this.http.post(this.apiUrl + '/verify-auth', body);
+      }
 }

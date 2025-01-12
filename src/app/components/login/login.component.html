@@ -13,10 +13,10 @@
       </mat-form-field>
     <button class="login-btn" mat-fab extended (click)="onSignUp()">
       <mat-icon>favorite</mat-icon>
-      Login
+      Sign Up
     </button>
     <p>i have a account! <a (click)="onTabSwitch()">Sign In</a></p>
-    <p>{{isError}}</p>
+    <p class="error">{{isError}}</p>
   </div>
   } @else {
 
@@ -36,6 +36,7 @@
       Login
     </button>
     <p>don't have a account? <a (click)="onTabSwitch()">Register</a></p>
+    <p class="error">{{isError}}</p>
   </div>
   }
 </div>
