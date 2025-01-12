@@ -8,7 +8,8 @@ export class AuthService {
 
   constructor() { }
 
-  apiUrl = 'http://localhost:3000';
+  // apiUrl = 'http://localhost:3000';
+  apiUrl = 'https://new-passkey-login.vercel.app';
 
   http = inject(HttpClient);
 
