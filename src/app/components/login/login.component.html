@@ -4,7 +4,7 @@
     <h1>Sign Up</h1>
       <mat-form-field appearance="outline" hideRequiredMarker>
         <mat-label>Username</mat-label>
-        <input matInput placeholder="zccott" [formControl]="username" />
+        <input matInput placeholder="username" [formControl]="username" />
         @if(username.touched && username.hasError('required')){
         <mat-error> Username is required. </mat-error>
         } @else if (username.touched && username.hasError('minlength')) {
@@ -24,7 +24,7 @@
     <h1>Login</h1>
       <mat-form-field appearance="outline" hideRequiredMarker>
         <mat-label>Username</mat-label>
-        <input matInput placeholder="zccott" [formControl]="username" />
+        <input matInput placeholder="username" [formControl]="username" />
         @if(username.touched && username.hasError('required')) {
         <mat-error> Username is required. </mat-error>
         } @else if (username.touched && username.hasError('minlength')) {
