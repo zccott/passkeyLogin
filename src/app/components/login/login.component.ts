@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  isSignUp: boolean = true;
+  isSignUp: boolean = false;
   isError: string = '';
 
   authsrv = inject(AuthService);
