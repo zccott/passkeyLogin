@@ -7,7 +7,7 @@
         <input matInput placeholder="zccott" [formControl]="username" />
         @if(username.touched && username.touched){
         <mat-error> Username is required. </mat-error>
-        } @else if (username.touched &&username.hasError('minlength')) {
+        } @else if (username.touched && username.hasError('minlength')) {
         <mat-error> At least 3 characters. </mat-error>
         }
       </mat-form-field>
