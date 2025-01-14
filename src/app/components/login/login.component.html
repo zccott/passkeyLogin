@@ -5,7 +5,7 @@
       <mat-form-field appearance="outline" hideRequiredMarker>
         <mat-label>Username</mat-label>
         <input matInput placeholder="zccott" [formControl]="username" />
-        @if(username.touched && username.touched){
+        @if(username.touched && username.hasError('required')){
         <mat-error> Username is required. </mat-error>
         } @else if (username.touched && username.hasError('minlength')) {
         <mat-error> At least 3 characters. </mat-error>
@@ -25,9 +25,9 @@
       <mat-form-field appearance="outline" hideRequiredMarker>
         <mat-label>Username</mat-label>
         <input matInput placeholder="zccott" [formControl]="username" />
-        @if(username.touched && username.touched){
+        @if(username.touched && username.hasError('required')) {
         <mat-error> Username is required. </mat-error>
-        } @else if (username.touched &&username.hasError('minlength')) {
+        } @else if (username.touched && username.hasError('minlength')) {
         <mat-error> At least 3 characters. </mat-error>
         }
       </mat-form-field>
