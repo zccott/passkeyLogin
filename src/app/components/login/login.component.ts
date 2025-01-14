@@ -64,7 +64,7 @@ export class LoginComponent {
         this.isError = 'registered success';
         setTimeout(() => {
           this.onTabSwitch();
-        }, 5000);
+        }, 2000);
       })
     } catch (err) {
       console.error('Error during registration');
